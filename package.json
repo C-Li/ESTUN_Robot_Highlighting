@@ -1,0 +1,55 @@
+{
+  "name": "estun-rcs2-language-syntax",
+  "displayName": "埃斯顿（ESTUN）机器人RCS2语法高亮",
+  "description": "语法高亮显示ESTUN机器人RCS2编程语言(.erd和.erp文件)",
+  "version": "1.0.0",
+  "publisher": "AhWei",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Languages"
+  ],
+  "keywords": [
+    "estun",
+    "rcs2",
+    "robot",
+    "programming",
+    "syntax highlighting"
+  ],
+  "homepage": "https://github.com/your-username/estun-rcs2-language-syntax",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/estun-rcs2-language-syntax.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/estun-rcs2-language-syntax/issues"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "robot-language",
+        "aliases": [
+          "ESTUN RCS2 Robot Language",
+          "estun-rcs2-robot-language",
+          "RCS2 Robot Language"
+        ],
+        "extensions": [
+          ".erd",
+          ".erp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "robot-language",
+        "scopeName": "source.robot-language",
+        "path": "./syntaxes/robot-language.tmLanguage.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.7.1"
+  }
+}

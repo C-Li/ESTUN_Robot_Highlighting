@@ -1,0 +1,160 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "ESTUN Robot Language",
+  "scopeName": "source.robot-language",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#data-types"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+        "include": "#labels"
+      },
+      {
+        "include": "#constants"
+      }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.robot-language",
+          "begin": "//",
+          "end": "$"
+        },
+        {
+          "name": "comment.block.robot-language",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.robot-language",
+          "match": "\\b(IF|THEN|ELSIF|ELSE|ENDIF|GOTO|CALL|Start|End|and|or|not)\\b"
+        }
+      ]
+    },
+    "data-types": {
+      "patterns": [
+        {
+          "name": "storage.type.robot-language",
+          "match": "\\b(_type|AREA|TOOL|USERCOOR|PAYLOAD|ZONE|SPEED|SimDI|SimDO|SimAI|SimAO|APOS|CPOS|DAPOS|DCPOS|POSCFG|LoadDyn|CenterPos|InertiaTensor|RESERVED|INT|World|nullTool)\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.robot-language",
+          "match": "\\b(SetPayload|SetRtInfo|SetRtToErr|SetSimDO|WaitSimDI|WaitCondition|Wait|GetCurAPos|GetCurCPos|SetCoord|MovL|MovJ|SetTool|SetZone|SetSpeed|SetAccel|SetOvrd|ResetOvrd|Stop|Clear|Circle|MoveC|MoveJ|MoveL|MoveAbsJ|MoveJDO|MoveLDO|SearchL|SearchC|TriggL|TriggJ|TriggIO|WaitDI|WaitDO|WaitAI|WaitAO|WaitTime|WaitUntil|SyncMoveOff|SyncMoveOn|SyncMoveSupervise|StartLoad|StopLoad|Supervise|TPWrite|TPReadNum|TPReadFK|TPReadBool|TPReadStr|TPShow|VelSet|AccSet|ConfJ|Offs|RelTool|CRobT|CPos|EOffs|EulerZYX|OrientZYX|RobTarget|TransPose|PoseAdd|PoseInv|PoseMult|PoseVect|VectAdd|VectSub|VectMult|VectDiv|VectToMat|MatToVect|CrossProd|DotProd|Abs|Sqrt|Sin|Cos|Tan|ASin|ACos|ATan|ATan2|Distance|Round|Trunc|DOutput|DInput|AOutput|AInput|GOutput|GInput|IGroup|ISignalAI|ISignalAO|ISignalDI|ISignalDO|ISignalGI|ISignalGO|Connect|Disconnect|IOReset|Set|SetDO|SetAO|SetGO|SetDI|SetAI|GetDI|GetAI|GetDO|GetAO|GetGI|TestDI|TestAI|TestDO|TestAO|TestGI|BitSet|BitClear|BitTest|DOutput|DInput|GOutput|GInput|IGroup|ISignalAI|ISignalAO|ISignalDI|ISignalDO|ISignalGI|ISignalGO|Connect|Disconnect|IOReset)\\b"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.robot-language",
+          "match": "\\b(t_p\\.|t_s\\.|t_l\\.|t_g\\.)[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        },
+        {
+          "name": "variable.other.robot-language",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*=\\s*\\{)"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.robot-language",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.robot-language",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.robot-language",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.robot-language",
+          "match": "==|>=|<=|>|<|!="
+        },
+        {
+          "name": "keyword.operator.logical.robot-language",
+          "match": "\\b(and|or|not)\\b"
+        },
+        {
+          "name": "keyword.operator.assignment.robot-language",
+          "match": "="
+        },
+        {
+          "name": "keyword.operator.arithmetic.robot-language",
+          "match": "\\+|\\-|\\*|\\/|\\%"
+        }
+      ]
+    },
+    "labels": {
+      "patterns": [
+        {
+          "name": "entity.name.label.robot-language",
+          "match": "^[a-zA-Z_][a-zA-Z0-9_]*:"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.robot-language",
+          "match": "\\b(FINE|RELATIVE|World|USERCOOR0|true|false)\\b"
+        },
+        {
+          "name": "variable.parameter.robot-language",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*=\\s*\\d+)"
+        },
+        {
+          "name": "variable.parameter.robot-language",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*=\\s*\"[^\"]*\")"
+        },
+        {
+          "name": "variable.parameter.robot-language",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*=\\s*\\{)"
+        }
+      ]
+    }
+  }
+}

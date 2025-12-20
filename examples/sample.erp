@@ -1,0 +1,86 @@
+// ESTUN RCS2机器人语言示例文件
+// 这是一个.erp文件示例，展示程序控制逻辑
+
+Start:
+SetRtInfo{msg="程序开始",eid=70001}
+SetPayload{PayLoad=t_g.PAYLOAD0}
+SetTool{Tool=t_s.TOOL0}
+SetZone{Zone=t_s.ZONE_FINE}
+SetSpeed{Speed=t_s.V1000}
+SetAccel{Accel=100}
+SetOvrd{Ovrd=100}
+CALL InitSingal
+
+// 主循环
+Label1:
+IF ( t_p.Input1.value == 1 ) THEN
+    CALL ResetDoneSignal
+    CALL Process1
+ELSIF ( t_p.Input2.value == 1 ) THEN
+    CALL ResetDoneSignal
+    CALL Process2
+ELSIF ( t_p.Input3.value == 1 ) THEN
+    CALL ResetDoneSignal
+    CALL Process3
+ENDIF
+
+/*需要延时轮询主程序,否则示教器会断连*/
+Wait{T=100}
+GOTO Label1
+
+// 子程序示例
+Process1:
+SetRtInfo{msg="处理过程1开始",eid=70002}
+IF t_p.Output1.value == 0 THEN
+    SetRtToErr{msg="错误信息",eid=90001}
+    WaitCondition{JudgeCondi="0 > 1",T=0,InterEnable=0,Ret=t_l.INT0}
+ENDIF
+
+/*运动控制*/
+MovJ{P=t_p.Position1,V=t_s.V1000,B="RELATIVE",C=t_s.C100,Tool=t_s.TOOL0,Coord=t_g.USERCOOR0}
+MovL{P=t_p.Position2,V=t_s.V500,B="FINE",Coord=t_g.USERCOOR0}
+
+/*IO控制*/
+SetSimDO{SimIO=t_p.Output1,Val=1}
+WaitSimDI{SimIO=t_p.Input1,Val=1,T=0,InterEnable=1,Ret=t_p.INT0}
+
+/*高级运动示例*/
+Circle{P1=t_p.Position2,P2=t_p.Position3,V=t_s.V500,B="FINE",Coord=t_g.USERCOOR0}
+MoveC{P1=t_p.Position4,P2=t_p.Position5,V=t_s.V800,B="RELATIVE",Tool=t_s.TOOL0}
+
+/*搜索和触发示例*/
+SearchL{P=t_p.SearchPos,SearchDir="Z",Dist=100,V=t_s.V200,StopDist=5,ProbeSignal=t_p.Input2,ProbeVal=1}
+TriggL{P=t_p.TrigPos,V=t_s.V500,Zone=t_s.ZONE_FINE,TriggIO=t_p.Output2,TriggVal=1}
+
+/*等待和时间控制*/
+WaitTime{T=2000}
+WaitUntil{Cond="t_p.Input3.value == 1",MaxTime=5000}
+
+/*数学运算示例*/
+t_l.INT0.value = t_l.INT1.value + 1
+t_l.INT2.value = t_l.INT1.value * 2
+t_l.INT3.value = t_l.INT1.value / 2
+
+/*逻辑运算示例*/
+IF (t_p.Input1.value == 1 and t_p.Input2.value == 0) THEN
+    SetSimDO{SimIO=t_p.Output3,Val=1}
+ELSEIF (t_p.Input1.value == 0 or t_p.Input3.value == 1) THEN
+    SetSimDO{SimIO=t_p.Output3,Val=0}
+ENDIF
+
+SetRtInfo{msg="处理过程1完成",eid=70003}
+RETURN
+
+Process2:
+SetRtInfo{msg="处理过程2开始",eid=70004}
+/*类似Process1的处理逻辑*/
+SetRtInfo{msg="处理过程2完成",eid=70005}
+RETURN
+
+Process3:
+SetRtInfo{msg="处理过程3开始",eid=70006}
+/*类似Process1的处理逻辑*/
+SetRtInfo{msg="处理过程3完成",eid=70007}
+RETURN
+
+End;

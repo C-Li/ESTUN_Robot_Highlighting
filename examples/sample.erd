@@ -1,0 +1,43 @@
+// ESTUN RCS2机器人语言示例文件
+// 这是一个.erd文件示例，展示数据定义
+
+// 位置点定义
+Home_Pos={_type="APOS",a1=42.350500,a2=-14.239100,a3=18.313800,a4=0.735600,a5=84.069100,a6=-47.007000,a7=-0.017600,note="原位"}
+Position1={_type="CPOS",x=-461.180700,y=-1626.905800,z=1363.489400,a=90.468200,b=0.452400,c=-179.444900,note="位置1"}
+Position2={_type="CPOS",x=373.400500,y=2412.483700,z=-304.812600,a=90.783800,b=61.211900,c=89.922000,note="位置2"}
+
+// 数字输入定义
+Input1={_type="SimDI",port=53,value=0,note="输入信号1"}
+Input2={_type="SimDI",port=58,value=0,note="输入信号2"}
+Input3={_type="SimDI",port=62,value=0,note="输入信号3"}
+
+// 数字输出定义
+Output1={_type="SimDO",port=53,value=0,note="输出信号1"}
+Output2={_type="SimDO",port=57,value=0,note="输出信号2"}
+Output3={_type="SimDO",port=61,value=0,note="输出信号3"}
+
+// 模拟输入输出定义
+AnalogInput1={_type="SimAI",port=10,value=0.0,note="模拟输入1"}
+AnalogOutput1={_type="SimAO",port=10,value=0.0,note="模拟输出1"}
+
+// 区域定义
+Area1={_type="AREA",id=3,activate=true,isInArea=false,areaType=2,areaShape=0,refSysScope=1,refSysName="USERCOOR0",enInPut=false,enInHigh=true,diType=0,enOutPut=true,enOutHigh=false,doType=12,OutputActStatePort=81,StartPointX=-140.128600,StartPointY=-504.740500,StartPointZ=-386.246100,lenXR=800.000000,lenYH=200.000000,lenZ=200.000000,isFlangeEnd=0,note="区域1"}
+
+// 用户坐标系定义
+USERCOOR0={_type="USERCOOR",id=1,x=1808.508300,y=344.722300,z=1286.494400,a=71.000000,b=0.000000,c=0.000000,note="用户坐标系0"}
+
+// 负载定义
+PAYLOAD0={_type="PAYLOAD",id=2,dyn={_type="LoadDyn",M=162.680000,pos={_type="CenterPos",Mx=-2.340000,My=-218.460000,Mz=175.660000},tensor={_type="InertiaTensor",Ixx=0.000000,Iyy=0.000000,Izz=0.000000,Ixy=0.000000,Iyz=0.000000,Ixz=0.000000}},note="负载0"}
+
+// 速度和区域定义
+V1000={_type="SPEED",v_tcp=1000.0,v_ori=100.0,v_leax=100.0,v_reax=100.0,note="速度1000"}
+V500={_type="SPEED",v_tcp=500.0,v_ori=50.0,v_leax=50.0,v_reax=50.0,note="速度500"}
+ZONE_FINE={_type="ZONE",pzone_tcp=0,pzone_ori=0,pzone_leax=0,pzone_reax=0,zone_ori=0,zone_leax=0,zone_reax=0,note="FINE区域"}
+ZONE_RELATIVE={_type="ZONE",pzone_tcp=5,pzone_ori=5,pzone_leax=5,pzone_reax=5,zone_ori=5,zone_leax=5,zone_reax=5,note="RELATIVE区域"}
+
+// 工具定义
+TOOL0={_type="TOOL",id=0,tframe={_type="POSCFG",x=0.0,y=0.0,z=0.0,q1=1.0,q2=0.0,q3=0.0,q4=0.0},payload={_type="PAYLOAD",id=1,dyn={_type="LoadDyn",M=5.0,pos={_type="CenterPos",Mx=0.0,My=0.0,Mz=50.0},tensor={_type="InertiaTensor",Ixx=0.1,Iyy=0.1,Izz=0.1,Ixy=0.0,Iyz=0.0,Ixz=0.0}}},note="工具0"}
+
+// 整数变量
+INT0={_type="INT",value=0,saveflag=false,note="整数变量0"}
+INT1={_type="INT",value=0,saveflag=false,note="整数变量1"}
