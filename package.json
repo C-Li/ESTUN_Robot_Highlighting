@@ -1,5 +1,5 @@
 {
-  "name": "estun-rcs2-language-syntax",
+  "name": "estun-robot-highlighting",
   "displayName": "埃斯顿（ESTUN）机器人RCS2语法高亮",
   "description": "语法高亮显示ESTUN机器人RCS2编程语言(.erd和.erp文件)",
   "version": "1.0.0",
@@ -17,13 +17,13 @@
     "programming",
     "syntax highlighting"
   ],
-  "homepage": "https://github.com/your-username/estun-rcs2-language-syntax",
+  "homepage": "https://github.com/C-Li/ESTUN_Robot_Highlighting",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/estun-rcs2-language-syntax.git"
+    "url": "https://github.com/C-Li/ESTUN_Robot_Highlighting.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/estun-rcs2-language-syntax/issues"
+    "url": "https://github.com/C-Li/ESTUN_Robot_Highlighting/issues"
   },
   "contributes": {
     "languages": [
