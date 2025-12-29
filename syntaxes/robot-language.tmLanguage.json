@@ -43,6 +43,11 @@
           "end": "$"
         },
         {
+          "name": "comment.line.double-minus.robot-language",
+          "begin": "--",
+          "end": "$"
+        },
+        {
           "name": "comment.block.robot-language",
           "begin": "/\\*",
           "end": "\\*/"

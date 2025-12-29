@@ -18,12 +18,12 @@ export class HoverProvider implements vscode.HoverProvider {
         position: vscode.Position,
         token: vscode.CancellationToken
     ): vscode.ProviderResult<vscode.Hover> {
-        const range = document.getWordRangeAtPosition(position);
+        const range = document.getWordRangeAtPosition(position, /[\w.]+/);
         if (!range) {
             return null;
         }
 
-        const word = document.getText(range);
+        let word = document.getText(range);
         let hoverInfo = allHoverInfo[word];
 
         // 如果没有找到匹配的关键字，检查是否是标签定义
@@ -37,6 +37,17 @@ export class HoverProvider implements vscode.HoverProvider {
                     syntax: '<label_name>:',
                     example: `${word}:\nGOTO ${word}`
                 };
+            }
+        }
+
+        // 如果还是没有找到，检查是否是变量前缀（t_p., t_s., t_l., t_g.）
+        if (!hoverInfo) {
+            const prefixes = ['t_p.', 't_s.', 't_l.', 't_g.'];
+            for (const prefix of prefixes) {
+                if (word.startsWith(prefix)) {
+                    hoverInfo = allHoverInfo[prefix];
+                    break;
+                }
             }
         }
 

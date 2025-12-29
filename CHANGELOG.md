@@ -2,6 +2,16 @@
 
 本项目的所有重要变更都将记录在此文件中。
 
+## [1.1.2]
+
+### 新增
+- 支持变量前缀悬停提示（t_p., t_s., t_l., t_g.）
+- 支持`--`双减号行注释语法高亮
+
+### 修复
+- 修复变量前缀悬停提示不生效的问题
+- 优化分词逻辑，支持提取包含点号的变量名
+
 ## [1.1.1]
 
 ### 移除
@@ -31,11 +41,6 @@
 - 更新README.md，添加SetRtToErr系统指令的说明
 - 更新syntaxes/robot-language.tmLanguage.json，移除虚构指令的语法高亮
 - 更新README.md，移除已删除的虚构指令列表
-
-### 修复
-- 修复标签无法识别的问题，现在可以正确识别任意标签名并显示悬停提示
-- 修复悬停提示中部分关键字注释不够详细的问题
-- 修复与官方手册不符的指令定义问题
 
 ## [1.1.0]
 
@@ -73,7 +78,7 @@
 - 支持标签和运算符高亮
 - 支持丰富的数据类型：APOS、CPOS、DAPOS、DCPOS、TOOL、PAYLOAD、AREA、USERCOOR、SimDI、SimDO、SimAI、SimAO等
 - 支持控制流关键字：IF、THEN、ELSIF、ELSE、ENDIF、GOTO、CALL、Start、End
-- 支持运动控制指令：MovL、MovJ、Circle、MoveC、MoveAbsJ、MoveJDO、MoveLDO等
+- 支持运动控制指令：MovL、MovJ、Circle、MoveC、MovAbsJ、MoveJDO、MoveLDO等
 - 支持搜索和触发指令：SearchL、SearchC、TriggL、TriggJ、TriggIO等
 - 支持位置获取函数：GetCurAPos、GetCurCPos等
 - 支持系统设置函数：SetPayload、SetTool、SetZone、SetSpeed、SetAccel、SetOvrd、ResetOvrd、SetCoord等
