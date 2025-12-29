@@ -4,11 +4,7 @@
 Start:
 SetRtInfo{msg="程序开始",eid=70001}
 SetPayload{PayLoad=t_g.PAYLOAD0}
-SetTool{Tool=t_s.TOOL0}
-SetZone{Zone=t_s.ZONE_FINE}
-SetSpeed{Speed=t_s.V1000}
-SetAccel{Accel=100}
-SetOvrd{Ovrd=100}
+
 CALL InitSingal
 
 // 主循环
@@ -64,23 +60,22 @@ t_l.INT3.value = t_l.INT1.value / 2
 /*逻辑运算示例*/
 IF (t_p.Input1.value == 1 and t_p.Input2.value == 0) THEN
     SetSimDO{SimIO=t_p.Output3,Val=1}
-ELSEIF (t_p.Input1.value == 0 or t_p.Input3.value == 1) THEN
-    SetSimDO{SimIO=t_p.Output3,Val=0}
+ELSE
+    IF (t_p.Input1.value == 0 or t_p.Input3.value == 1) THEN
+        SetSimDO{SimIO=t_p.Output3,Val=0}
+    ENDIF
 ENDIF
 
 SetRtInfo{msg="处理过程1完成",eid=70003}
-RETURN
 
 Process2:
 SetRtInfo{msg="处理过程2开始",eid=70004}
 /*类似Process1的处理逻辑*/
 SetRtInfo{msg="处理过程2完成",eid=70005}
-RETURN
 
 Process3:
 SetRtInfo{msg="处理过程3开始",eid=70006}
 /*类似Process1的处理逻辑*/
 SetRtInfo{msg="处理过程3完成",eid=70007}
-RETURN
 
 End;

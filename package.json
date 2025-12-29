@@ -2,7 +2,7 @@
   "name": "estun-robot-highlighting",
   "displayName": "埃斯顿（ESTUN）机器人RCS2语法高亮",
   "description": "语法高亮显示ESTUN机器人RCS2编程语言(.erd和.erp文件)",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "publisher": "AhWei",
   "engines": {
     "vscode": "^1.0.0"
@@ -24,6 +24,15 @@
   },
   "bugs": {
     "url": "https://github.com/C-Li/ESTUN_Robot_Highlighting/issues"
+  },
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:robot-language"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
   },
   "contributes": {
     "languages": [
@@ -50,6 +59,9 @@
     ]
   },
   "devDependencies": {
-    "@vscode/vsce": "^3.7.1"
+    "@vscode/vsce": "^3.7.1",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.0.0",
+    "typescript": "^5.0.0"
   }
 }
