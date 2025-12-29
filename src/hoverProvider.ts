@@ -40,12 +40,27 @@ export class HoverProvider implements vscode.HoverProvider {
             }
         }
 
-        // 如果还是没有找到，检查是否是变量前缀（t_p., t_s., t_l., t_g.）
+        // 如果没有找到匹配的关键字，检查是否是以变量前缀开头的完整变量名（t_p.V1000, t_s.C100等）
         if (!hoverInfo) {
             const prefixes = ['t_p.', 't_s.', 't_l.', 't_g.'];
             for (const prefix of prefixes) {
                 if (word.startsWith(prefix)) {
-                    hoverInfo = allHoverInfo[prefix];
+                    const suffix = word.slice(prefix.length);
+                    const prefixInfo = allHoverInfo[prefix];
+                    const suffixInfo = allHoverInfo[suffix];
+
+                    if (suffixInfo) {
+                        const prefixName = prefixInfo ? this.getPrefixName(prefix) : prefix;
+                        hoverInfo = {
+                            name: suffixInfo.name,
+                            description: `${prefixName}，${suffixInfo.description}`,
+                            syntax: suffixInfo.syntax,
+                            parameters: suffixInfo.parameters,
+                            example: suffixInfo.example
+                        };
+                    } else if (prefixInfo) {
+                        hoverInfo = prefixInfo;
+                    }
                     break;
                 }
             }
@@ -57,6 +72,46 @@ export class HoverProvider implements vscode.HoverProvider {
 
         const markdownString = this.formatHoverInfo(hoverInfo);
         return new vscode.Hover(markdownString, range);
+    }
+
+    /**
+     * 获取前缀的中文名称
+     * @param prefix 前缀字符串
+     * @returns 中文名称
+     */
+    private getPrefixName(prefix: string): string {
+        const prefixNames: Record<string, string> = {
+            't_p.': '程序变量',
+            't_s.': '系统变量',
+            't_l.': '局部变量',
+            't_g.': '全局变量'
+        };
+        return prefixNames[prefix] || prefix;
+    }
+
+    /**
+     * 合并两个悬停信息
+     * @param prefixInfo 前缀信息
+     * @param suffixInfo 后缀信息
+     * @returns 合并后的悬停信息
+     */
+    private mergeHoverInfo(prefixInfo: HoverInfo, suffixInfo: HoverInfo): HoverInfo {
+        const merged: HoverInfo = {
+            name: `${prefixInfo.name} + ${suffixInfo.name}`,
+            description: `${prefixInfo.description}\n\n${suffixInfo.description}`
+        };
+
+        if (prefixInfo.syntax || suffixInfo.syntax) {
+            merged.syntax = [prefixInfo.syntax, suffixInfo.syntax].filter(Boolean).join('\n');
+        }
+        if (prefixInfo.parameters || suffixInfo.parameters) {
+            merged.parameters = [prefixInfo.parameters, suffixInfo.parameters].filter(Boolean).join('\n');
+        }
+        if (prefixInfo.example || suffixInfo.example) {
+            merged.example = [prefixInfo.example, suffixInfo.example].filter(Boolean).join('\n\n');
+        }
+
+        return merged;
     }
 
     /**
