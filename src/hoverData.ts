@@ -1020,7 +1020,7 @@ export const constants: Record<string, HoverInfo> = {
 export const variablePrefixes: Record<string, HoverInfo> = {
     't_p.': {
         name: 't_p.',
-        description: '程序变量前缀，用于访问程序作用域内的变量',
+        description: '工程变量前缀，用于访问工程作用域内的变量',
         syntax: 't_p.<variable_name>',
         example: 't_p.Position1'
     },
@@ -1032,7 +1032,7 @@ export const variablePrefixes: Record<string, HoverInfo> = {
     },
     't_l.': {
         name: 't_l.',
-        description: '局部变量前缀，用于访问局部作用域内的变量',
+        description: '程序变量前缀，用于访问程序作用域内的变量',
         syntax: 't_l.<variable_name>',
         example: 't_l.INT0'
     },

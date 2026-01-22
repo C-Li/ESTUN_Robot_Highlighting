@@ -81,9 +81,9 @@ export class HoverProvider implements vscode.HoverProvider {
      */
     private getPrefixName(prefix: string): string {
         const prefixNames: Record<string, string> = {
-            't_p.': '程序变量',
+            't_p.': '工程变量',
             't_s.': '系统变量',
-            't_l.': '局部变量',
+            't_l.': '程序变量',
             't_g.': '全局变量'
         };
         return prefixNames[prefix] || prefix;
